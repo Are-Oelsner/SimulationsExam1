@@ -1,0 +1,137 @@
+% Are Oelsner
+% Simulations Exam 1
+\documentclass[11pt,addpoints,answers]{exam}
+
+% required macros -- get latest hwheader.tex file from blackboard if compiling
+\input{hwheader}
+
+\hwheader{Exam 1}
+{Are Oelsner}
+{Spring 2018, Lawson}
+{CS 326, Simulations}
+{Due: 10:30am Monday, Mar 26}
+
+% VARIABLES
+
+\begin{document}
+
+\pagestyle{head}                % put header on every page
+
+\noindent 
+This assignment covers Depth First Search, the Connected Component algorithm,
+Breadth First Search, and Dijkstra's algorithm.
+\\
+% QUESTIONS START HERE.  PROVIDE SOLUTIONS WITHIN THE "solution"
+% ENVIRONMENTS FOLLOWING EACH QUESTION.
+
+\begin{questions}
+
+  \question 
+  Use discrete-event simulation to simulate the performance of a single-server
+  service node with a FIFO queue discipline and a finite service node capacity.
+  Assume that:
+  \begin{itemize}
+    \item the arrival process has $exponential(\mu)$ interarrival times with
+      average interarrival time $\mu = 2$;
+    \item the service process (per job) consists of a number of service tasks
+      equal to $1 + \mu$, where $\mu$ is a $geometric(0.9)$ variate (see 3.1); and
+    \item the time for each of the service tasks within a service process is,
+      indepently for each task, a $uniform(0.1, 0.2)$ random variate.
+  \end{itemize}
+  For this work, I suggest that you start with your next-event implementation
+  of ssq, and use the streams capability in vexp, vgeom, and vunif from the
+  simEd library.
+
+  \begin{parts}
+    \part Based on 1 000 000 processed jobs, construct a table of the estimated
+    steady-state probability of rejection for service node capacities of 1, 2,
+    3, 4, 5, and 6. (Note that a service node capacity of 1 corresponds to a
+    server only with no queue.)
+    \begin{solution}
+    \end{solution}
+    \part Construct a similar table if the time per task is changed to be
+    $uniform(0.1, 0.3)$.
+    \begin{solution}
+    \end{solution} 
+    \part Provide appropriate histograms to compare the two
+    different service models. Discuss the models and comment on their
+    appropriateness for a single-server queuing system.
+    \begin{solution}
+    \end{solution}
+    \part Comment on how the probability of rejection depends on the service process.
+    \begin{solution}
+    \end{solution}
+    \part Discuss what you did to convince yourself that your results are correct.
+    \begin{solution}
+    \end{solution}
+  \end{parts}
+
+  \question
+  In collecting statistics from simulation output, you often focus on the
+  sample mean $\bar{x}$ and sample variance $s^2$ , which correspond to the
+  first two population $moments^1$ : the population mean $\mu$ and the
+  population variance $\sigma^2$. The third (central) moment is the population
+  skewness, often labeled $\gamma$. The sample skewness is given by the
+  following two-pass equation:
+
+  \begin{center}
+    $q^3 = \frac{1}{n}\sum_{i=1}^{n}(\frac{x_i-\bar{x}}{s})^3$
+  \end{center}
+  Note: The continuous random variable $X$ is $Erlang(n,\beta)$ if and only if
+  \begin{center}
+    $X = X_1 + X_2 + ... + X_n$
+  \end{center}
+  where $X_1, X_2, . . . , X_n$ is an $iid$ sequence of $exponential(\beta)$
+  random variables; the associated mean and standard deviation are $\mu =
+  n\beta$ and $\sigma = \sqrt{n}\beta$ respectively. Alternatively, when the
+  gamma distribution has integer shape parameter, the distribution is $Erlang$.
+
+  \begin{parts}
+    \part Derive the one-pass version of this equation. 
+    \part Provide an R function that, given a vector of data as a parameter,
+    computes and returns as an R list the sample mean, sample standard
+    deviation, and the sample statistic q = p3 q 3. Your implementation must
+    compute all three statistics using only a single pass through the data
+    (non-Welford), and you may not use the mean() nor sd() functions available
+    by default in R, nor may you use any non-standard R packages. 
+    \part Devise and conduct an experiment to compare the histogram and sample
+    skewness of many samples drawn from each of three different distributions
+    having common mean: uniform, exponential, and Erlang. 
+    \part Comment.
+  \end{parts}
+
+\question A test is compiled by selecting 12 different questions, at random and
+without replacement, from a well-publicized list of 120 questions. After
+studying this list you are able to classify all 120 questions into two classes,
+I and II. Class I questions are those about which you feel confident; the
+remaining questions define class II. Assume that your grade probability,
+conditioned on the class of the problems, is
+\begin{center}
+  \begin{tabular}{c  c  c  c  c  c}
+
+    & A & B & C & D & F\\
+    class I & 0.6 & 0.3 & 0.1 & 0.0 & 0.0\\
+    class II & 0.0 & 0.1 & 0.4 & 0.4 & 0.1\\
+  \end{tabular}
+\end{center}
+In other words, if a question is class I, you have probability 0.6 of earning
+an A, probability 0.3 of earning a B, and so forth. Each test question is
+graded on an A = 4, B = 3, C = 2, D = 1, F = 0 scale and a score of 36 or
+better is required to pass the test. 
+  \begin{parts}
+    \part If there are 90 class I questions in the list, use Monte Carlo
+    simulation to generate a histogram of scores. 
+    \part Based on this histogram what is the probability that you will pass
+    the test?
+    \part Provide a sense of the uncertainty of your result.
+  \end{parts}
+
+\end{questions}
+
+\end{document}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
